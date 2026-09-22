@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restoran Asep Taser</title>
+    
+    <!-- Memuat Library Icon (FontAwesome) untuk Logo WA & Email -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f1ea;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigasi (Navbar) */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .navbar a:hover, .navbar a.active-nav {
+            background-color: #d9534f;
+            color: white;
+        }
+
+        /* Container Utama */
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-height: 500px; /* Menjaga ukuran kotak agar tidak terlalu pendek */
+        }
+
+        /* Sembunyikan semua section secara default */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Tampilkan hanya section yang aktif */
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            color: #d9534f;
+            margin-bottom: 5px;
+            font-size: 2.2em;
+        }
+
+        h2 {
+            color: #333;
+            border-left: 4px solid #d9534f;
+            padding-left: 10px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .intro {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Profil */
+        .profil-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .profil-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #d9534f;
+        }
+
+        /* Menu */
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-item {
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .menu-price {
+            color: #d9534f;
+        }
+
+        .menu-desc {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Video */
+        .video-container {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Kontak & Lokasi */
+        .info-box {
+            background-color: #fff8f6;
+            border: 1px dashed #d9534f;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 2;
+            font-size: 1.1em;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .contact-link:hover {
+            color: #d9534f;
+        }
+
+        .fa-whatsapp { color: #25D366; font-size: 1.4em; }
+        .fa-envelope { color: #d9534f; font-size: 1.3em; }
+
+        footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bilah Navigasi -->
+    <nav class="navbar">
+        <a onclick="bukaHalaman('home')" id="nav-home" class="active-nav">Home</a>
+        <a onclick="bukaHalaman('profil')" id="nav-profil">Profil</a>
+        <a onclick="bukaHalaman('about')" id="nav-about">About</a>
+        <a onclick="bukaHalaman('gallery')" id="nav-gallery">Gallery</a>
+        <a onclick="bukaHalaman('kontak')" id="nav-kontak">Kontak</a>
+        <a onclick="bukaHalaman('location')" id="nav-location">Location</a>
+    </nav>
+
+    <div class="container">
+        
+        <!-- HALAMAN HOME -->
+        <section id="home" class="page-section active">
+            <header>
+                <h1>Restoran Asep Taser</h1>
+                <p class="intro">Nikmati kelezatan santapan khas resep Kang Asep &mdash; dijamin menggugah selera!</p>
+            </header>
+            
+            <h2>Daftar Harga Menu</h2>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <div class="menu-header">
+                        <span>Nasi Goreng Taser Pedas</span>
+                        <span class="menu-price">&dollar;1.65</span>
+                    </div>
+                    <div class="menu-desc">Nasi goreng bumbu rempah spesial dengan level pedas mengejutkan, disajikan dengan telur dan ayam suwir.</div>
+                </li>
+                <li class="menu-item">
+                    <div class="menu-header">
+                        <span>Ayam Bakar Khas Kang Asep</span>
+                        <span class="menu-price">&dollar;1.98</span>
+                    </div>
+                    <div class="menu-desc">Ayam bakar bumbu meresap sampai ke tulang, disajikan dengan sambal goang dan lalapan segar.</div>
+                </li>
+                <li class="menu-item">
+                    <div class="menu-header">
+                        <span>Soto Betawi Kuah Santan</span>
+                        <span class="menu-price">&dollar;1.85</span>
+                    </div>
+                    <div class="menu-desc">Daging sapi empuk dengan kuah santan gurih kaya bumbu dan emping renyah.</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- HALAMAN PROFIL -->
+        <section id="profil" class="page-section">
+            <h2>Profil Pemilik</h2>
+            <div class="profil-box">
+                <img src="buat citra.jpeg" alt="Foto Sheva" class="profil-img" onerror="this.src='https://via.placeholder.com/120?text=Foto'">
+                <div>
+                    <p><strong>Nama:</strong> Sheva Abdullah Huda</p>
+                    <p><strong>Nim:</strong> 241011400640</p>
+                    <p><strong>Kelas:</strong> 05TPLP016</p>
+                    <p><strong>Tempat, Tanggal Lahir:</strong> Bandar Lampung, 21/06/06</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN ABOUT -->
+        <section id="about" class="page-section">
+            <h2>Tentang Restoran</h2>
+            <p style="line-height: 1.6; text-align: justify;">
+                <strong>Restoran Asep Taser</strong> didirikan dengan semangat untuk melestarikan resep kuliner khas Nusantara yang autentik. Bermula dari dapur kecil Kang Asep, restoran ini berkembang menjadi tujuan kuliner favorit berkat racikan bumbu rahasia yang turun-temurun. Kami berkomitmen untuk selalu menggunakan bahan-bahan segar berkualitas dan memberikan pelayanan terbaik.
+            </p>
+        </section>
+
+        <!-- HALAMAN GALLERY -->
+        <section id="gallery" class="page-section">
+            <h2>Galeri Kami</h2>
+            <p>Saksikan suasana dan hidangan kami pada video berikut:</p>
+            <div class="video-container">
+                <!-- Atribut controls, autoplay, dan muted ditambahkan agar video lebih mudah jalan -->
+                <video controls width="100%" poster="ayam.jpg" preload="metadata">
+                    <source src="ayam bakar.mp4" type="video/mp4">
+                    Maaf, browser Anda tidak mendukung pemutaran video HTML5.
+                </video>
+            </div>
+        </section>
+
+        <!-- HALAMAN KONTAK -->
+        <section id="kontak" class="page-section">
+            <h2>Hubungi Kami</h2>
+            <div class="info-box">
+                <!-- Logo WA -->
+                <a href="https://wa.me/6289505095340" target="_blank" class="contact-link">
+                    <i class="fa-brands fa-whatsapp"></i> 
+                    <strong>0895-0509-5340</strong>
+                </a>
+                
+                <!-- Logo Email -->
+                <a href="mailto:shevaabdullahhuda@gmail.com" class="contact-link">
+                    <i class="fa-solid fa-envelope"></i> 
+                    <strong>shevaabdullahhuda@gmail.com</strong>
+                </a>
+            </div>
+        </section>
+
+        <!-- HALAMAN LOCATION -->
+        <section id="location" class="page-section">
+            <h2>Lokasi Restoran</h2>
+            <div class="info-box">
+                <p><em>(Jl. Beringin 1 Blok E21 Kelurahan Benda Baru, Kecamatan Pamulang, Kota Tangerang Selatan)</em></p>
+            </div>
+        </section>
+
+        <!-- Footer (Tetap muncul di semua halaman) -->
+        <footer>
+            <p>&copy; 2026 Restoran Asep Taser. All Rights Reserved &reg;</p>
+        </footer>
+    </div>
+
+    <!-- Script JavaScript untuk mengatur perpindahan halaman/menu -->
+    <script>
+        function bukaHalaman(idHalaman) {
+            // 1. Sembunyikan semua halaman
+            let semuaHalaman = document.getElementsByClassName("page-section");
+            for (let i = 0; i < semuaHalaman.length; i++) {
+                semuaHalaman[i].classList.remove("active");
+            }
+            
+            // 2. Hapus warna merah dari semua tombol menu
+            let semuaTombol = document.querySelectorAll(".navbar a");
+            for (let i = 0; i < semuaTombol.length; i++) {
+                semuaTombol[i].classList.remove("active-nav");
+            }
+
+            // 3. Tampilkan halaman yang dipencet
+            document.getElementById(idHalaman).classList.add("active");
+            
+            // 4. Beri warna merah pada tombol yang sedang aktif
+            document.getElementById("nav-" + idHalaman).classList.add("active-nav");
+        }
+    </script>
+</body>
+</html>
