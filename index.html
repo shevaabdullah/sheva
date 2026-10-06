@@ -5,324 +5,423 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restoran Asep Taser</title>
     
-    <!-- Memuat Library Icon (FontAwesome) untuk Logo WA, Email, dan Pembayaran -->
+    <!-- Memuat Library Icon (FontAwesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Memuat Google Fonts (Poppins untuk Judul, Nunito untuk Teks) -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f1ea;
-            color: #333;
-            margin: 0;
-            padding: 0;
+        /* ================================== */
+        /* PENGATURAN DASAR & WARNA           */
+        /* ================================== */
+        :root {
+            --primary: #E63946; /* Merah Elegan */
+            --primary-hover: #C1121F;
+            --secondary: #2B2D42; /* Biru Gelap / Charcoal */
+            --bg-color: #F8F9FA;
+            --text-main: #333333;
+            --text-muted: #6C757D;
+            --white: #FFFFFF;
         }
 
-        /* Navigasi (Navbar) */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ================================== */
+        /* NAVBAR (Menu Navigasi Glassmorphism)*/
+        /* ================================== */
         .navbar {
-            background-color: #333;
-            overflow: hidden;
+            background-color: rgba(43, 45, 66, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .navbar a {
-            display: block;
-            color: white;
+            color: var(--white);
             text-align: center;
-            padding: 14px 18px;
+            padding: 10px 20px;
+            margin: 0 5px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.95em;
+            border-radius: 25px; /* Bentuk Pill */
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
         }
 
         .navbar a:hover, .navbar a.active-nav {
-            background-color: #d9534f;
-            color: white;
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
         }
 
-        /* Container Utama */
+        /* ================================== */
+        /* CONTAINER UTAMA                    */
+        /* ================================== */
         .container {
-            max-width: 750px;
-            margin: 30px auto;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             min-height: 500px;
         }
 
         /* Sistem Halaman SPA */
         .page-section {
             display: none;
-            animation: fadeIn 0.4s ease;
+            animation: slideUp 0.5s ease forwards;
+            opacity: 0;
         }
 
         .page-section.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        header {
+        /* ================================== */
+        /* HERO HEADER (Bagian Judul Utama)   */
+        /* ================================== */
+        .hero-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: var(--white);
             text-align: center;
-            padding-bottom: 10px;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.2);
         }
 
-        h1 {
-            color: #d9534f;
-            margin-bottom: 5px;
-            font-size: 2.2em;
+        .hero-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        .hero-header .intro {
+            font-style: italic;
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin: 0;
         }
 
         h2 {
-            color: #333;
-            border-left: 4px solid #d9534f;
-            padding-left: 10px;
-            margin-bottom: 15px;
-            margin-top: 25px;
-            font-size: 1.5em;
+            color: var(--secondary);
+            border-left: 5px solid var(--primary);
+            padding-left: 12px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.6em;
         }
 
-        .intro {
-            font-style: italic;
-            color: #666;
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        /* List & Tabel */
+        /* ================================== */
+        /* DESAIN LIST & TABEL MENU PREMIUM   */
+        /* ================================== */
         .kategori-list > li {
-            font-weight: bold;
-            color: #d9534f;
-            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
             font-size: 1.1em;
         }
         .kategori-list ul {
+            font-family: 'Nunito', sans-serif;
             font-weight: normal;
-            color: #333;
-            list-style-type: square;
-            margin-top: 5px;
-            font-size: 0.95em;
+            color: var(--text-main);
+            list-style-type: circle;
+            margin-top: 8px;
         }
+
+        /* Tabel Sudut Melengkung */
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             margin-top: 15px;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid #E9ECEF;
         }
         th, td {
-            padding: 12px;
+            padding: 15px;
             text-align: left;
+            border-bottom: 1px solid #E9ECEF;
         }
         th {
-            background-color: #d9534f;
-            color: white;
+            background-color: var(--secondary);
+            color: var(--white);
             text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
-        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) { background-color: #F8F9FA; }
+        tr:hover td { background-color: #FFF0F1; transition: background 0.3s; }
 
+        .langkah-pesan {
+            background: #F8F9FA;
+            padding: 25px 25px 25px 45px;
+            border-radius: 12px;
+            border: 1px dashed #CED4DA;
+        }
         .langkah-pesan li {
-            margin-bottom: 10px;
-            padding-left: 5px;
-            line-height: 1.5;
+            margin-bottom: 12px;
+            line-height: 1.6;
         }
 
         /* ================================== */
-        /* GAYA UNTUK FORM PEMESANAN          */
+        /* FORM PEMESANAN MODERN              */
         /* ================================== */
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 25px; }
         .form-group label {
             display: block;
-            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             margin-bottom: 8px;
-            color: #333;
+            color: var(--secondary);
         }
-        .form-control {
+        .form-control, .form-select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 12px 15px;
+            border: 2px solid #E9ECEF;
+            border-radius: 8px;
             box-sizing: border-box;
-            font-family: inherit;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
         }
         
-        /* Desain Baris Pilihan Paket Menu */
+        /* Baris Paket Menu */
         .paket-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: #fafafa;
-            padding: 10px 15px;
-            border: 1px solid #eee;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            gap: 10px;
+            background-color: #FFF;
+            padding: 15px;
+            border: 2px solid #E9ECEF;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            gap: 15px;
+            transition: border-color 0.3s;
         }
+        .paket-item:hover { border-color: #CED4DA; }
         .paket-item > label {
-            flex: 0 0 130px; /* Lebar tetap untuk label */
+            flex: 0 0 100px;
             margin: 0;
-            font-weight: normal;
-        }
-        .form-select {
-            flex: 1; /* Mengambil ruang tersisa */
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            font-weight: 600;
+            color: var(--secondary);
         }
         .paket-item input[type="number"] {
-            width: 70px;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            width: 80px;
+            padding: 10px;
+            border: 2px solid #E9ECEF;
+            border-radius: 8px;
+            text-align: center;
         }
 
+        /* Opsi Pembayaran */
         .payment-option {
-            background-color: #fafafa;
-            border: 1px solid #eee;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 10px;
+            background-color: #FFF;
+            border: 2px solid #E9ECEF;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
+        .payment-option:hover { border-color: var(--primary); }
         .payment-icons {
-            font-size: 1.5em;
-            margin-left: 10px;
+            font-size: 1.6em;
+            margin-left: 15px;
             vertical-align: middle;
         }
         .fa-cc-visa { color: #1a1f71; }
         .fa-cc-mastercard { color: #eb001b; }
         .fa-wallet { color: #4CAF50; }
         
+        /* Tombol Submit Animasi */
         .btn-submit {
-            background-color: #d9534f;
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
             color: white;
-            padding: 12px 25px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 6px;
-            font-size: 1.1em;
-            font-weight: bold;
+            border-radius: 30px; /* Bentuk Pill */
+            font-size: 1.2em;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 8px 15px rgba(230, 57, 70, 0.2);
         }
         .btn-submit:hover {
-            background-color: #c9302c;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(230, 57, 70, 0.3);
         }
 
         /* ================================== */
-        /* GAYA POP-UP MODAL (BERHASIL)       */
+        /* MODAL POP-UP (Animasi Cantik)      */
         /* ================================== */
         .modal-overlay {
-            display: none; /* Disembunyikan awalnya */
+            display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(43, 45, 66, 0.7);
+            backdrop-filter: blur(5px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
         }
         .modal-content {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
             max-width: 400px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-            animation: popIn 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes popIn {
-            from { transform: scale(0.7); opacity: 0; }
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
         .modal-content .fa-circle-check {
-            color: #28a745;
-            font-size: 4em;
-            margin-bottom: 15px;
+            color: #20C997;
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
         }
         .modal-content h3 {
-            color: #28a745;
+            color: var(--secondary);
+            font-size: 1.8em;
             margin-top: 0;
             margin-bottom: 10px;
         }
         .btn-close {
-            background-color: #333;
+            background-color: var(--secondary);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 30px;
             border: none;
-            border-radius: 6px;
+            border-radius: 25px;
             cursor: pointer;
-            margin-top: 20px;
-            font-weight: bold;
+            margin-top: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: background 0.3s;
         }
-        .btn-close:hover { background-color: #555; }
+        .btn-close:hover { background-color: #1a1b28; }
 
-        /* Profil, Video, Kontak */
+        /* ================================== */
+        /* PROFIL, VIDEO, KONTAK              */
+        /* ================================== */
         .profil-box {
             display: flex;
             align-items: center;
-            gap: 20px;
-            background-color: #fafafa;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #eee;
+            gap: 25px;
+            background: linear-gradient(to right, #FFF, #F8F9FA);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #E9ECEF;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
         .profil-img {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #d9534f;
+            border: 4px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
         }
         .video-container {
             width: 100%;
-            border-radius: 8px;
+            border-radius: 15px;
             overflow: hidden;
             background-color: #000;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         video { width: 100%; display: block; }
+        
         .info-box {
-            background-color: #fff8f6;
-            border: 1px dashed #d9534f;
-            padding: 20px;
-            border-radius: 8px;
+            background-color: #FFF;
+            border-left: 5px solid var(--primary);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             line-height: 2;
             font-size: 1.1em;
         }
         .contact-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: #333;
+            color: var(--secondary);
+            background: #F8F9FA;
+            padding: 10px 20px;
+            border-radius: 30px;
             margin-bottom: 10px;
+            margin-right: 10px;
+            border: 1px solid #E9ECEF;
+            transition: all 0.3s;
         }
-        .contact-link:hover { color: #d9534f; }
+        .contact-link:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        .contact-link:hover i { color: var(--white); }
+        .contact-link i { font-size: 1.4em; transition: color 0.3s; }
+        .fa-whatsapp { color: #25D366; }
+        .fa-envelope { color: var(--primary); }
 
         footer {
-            margin-top: 30px;
-            padding-top: 15px;
+            margin-top: 50px;
+            padding-top: 20px;
             text-align: center;
-            font-size: 0.85em;
-            color: #777;
-            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: var(--text-muted);
+            border-top: 1px solid #E9ECEF;
         }
     </style>
 </head>
 <body>
 
-    <!-- Bilah Navigasi -->
+    <!-- Bilah Navigasi Modern -->
     <nav class="navbar">
         <a onclick="bukaHalaman('home')" id="nav-home" class="active-nav">Home</a>
         <a onclick="bukaHalaman('pemesanan')" id="nav-pemesanan">Pemesanan</a>
@@ -337,16 +436,16 @@
         
         <!-- HALAMAN HOME -->
         <section id="home" class="page-section active">
-            <header>
+            <!-- Hero Header Premium -->
+            <header class="hero-header">
                 <h1>Restoran Asep Taser</h1>
                 <p class="intro">Nikmati kelezatan santapan khas resep Kang Asep &mdash; dijamin menggugah selera!</p>
             </header>
             
-            <p style="text-align: justify; line-height: 1.6; margin-top: 20px;">
+            <p style="text-align: justify; line-height: 1.8; font-size: 1.05em;">
                 Selamat datang di Restoran Asep Taser! Berikut adalah panduan kategori menu, daftar harga lengkap menggunakan desain tabel variatif, serta tata cara pemesanan di restoran kami.
             </p>
 
-            <!-- Nested List -->
             <h2>Kategori Hidangan</h2>
             <ul class="kategori-list">
                 <li>Makanan Utama (Main Course)
@@ -369,7 +468,6 @@
                 </li>
             </ul>
 
-            <!-- Tabel Menu -->
             <h2>Daftar Harga Menu</h2>
             <table>
                 <thead>
@@ -385,65 +483,61 @@
                         <td style="text-align: center;">1</td>
                         <td>Makanan Utama</td>
                         <td><strong>Nasi Goreng Taser Pedas</strong><br>Nasi goreng rempah dengan level pedas ekstra.</td>
-                        <td style="text-align: right; color: #d9534f;"><strong>&dollar;1.65</strong></td>
+                        <td style="text-align: right; color: var(--primary); font-weight: bold;">&dollar;1.65</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">2</td>
                         <td>Makanan Utama</td>
                         <td><strong>Soto Betawi Kuah Santan</strong><br>Daging sapi empuk dengan kuah santan gurih.</td>
-                        <td style="text-align: right; color: #d9534f;"><strong>&dollar;1.85</strong></td>
+                        <td style="text-align: right; color: var(--primary); font-weight: bold;">&dollar;1.85</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">3</td>
                         <td>Minuman</td>
-                        <td><strong>Jus Alpukat Spesial</strong><br>Jus alpukat murni dengan tambahan susu cokelat manis.</td>
-                        <td style="text-align: right; color: #d9534f;"><strong>&dollar;0.99</strong></td>
+                        <td><strong>Jus Alpukat Spesial</strong><br>Jus alpukat murni dengan tambahan susu cokelat.</td>
+                        <td style="text-align: right; color: var(--primary); font-weight: bold;">&dollar;0.99</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">4</td>
                         <td>Minuman</td>
-                        <td><strong>Es Teh Lemon Selasih</strong><br>Teh seduh segar dipadukan dengan perasan lemon segar.</td>
-                        <td style="text-align: right; color: #d9534f;"><strong>&dollar;0.55</strong></td>
+                        <td><strong>Es Teh Lemon Selasih</strong><br>Teh seduh segar dipadukan dengan perasan lemon.</td>
+                        <td style="text-align: right; color: var(--primary); font-weight: bold;">&dollar;0.55</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">5</td>
                         <td>Dessert</td>
                         <td><strong>Puding Cokelat Lumer</strong><br>Puding lembut dengan saus fla vanilla yang manis.</td>
-                        <td style="text-align: right; color: #d9534f;"><strong>&dollar;1.20</strong></td>
+                        <td style="text-align: right; color: var(--primary); font-weight: bold;">&dollar;1.20</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">6</td>
                         <td>Dessert</td>
-                        <td><strong>Es Krim Pisang Bakar</strong><br>Pisang bakar karamel yang disajikan bersama es krim vanilla.</td>
-                        <td style="text-align: right; color: #d9534f;"><strong>&dollar;1.50</strong></td>
+                        <td><strong>Es Krim Pisang Bakar</strong><br>Pisang bakar karamel bersama es krim vanilla.</td>
+                        <td style="text-align: right; color: var(--primary); font-weight: bold;">&dollar;1.50</td>
                     </tr>
                 </tbody>
             </table>
 
-            <!-- Ordered List -->
             <h2>5 Langkah Pemesanan Makanan</h2>
             <ol class="langkah-pesan">
                 <li>Silakan cari dan pilih tempat duduk yang tersedia di area restoran.</li>
                 <li>Tentukan hidangan utama, minuman, dan <em>dessert</em> dari tabel menu di atas.</li>
-                <li>Panggil pelayan yang sedang bertugas dan sebutkan pesanan Anda dengan jelas atau isi form di menu <strong>Pemesanan</strong>.</li>
+                <li>Panggil pelayan yang sedang bertugas atau isi form di menu <strong>Pemesanan</strong>.</li>
                 <li>Tunggu sekitar 10-15 menit selagi koki menyiapkan hidangan segar Anda.</li>
-                <li>Bawa nomor meja atau tagihan ke meja kasir untuk melakukan pembayaran setelah selesai makan.</li>
+                <li>Bawa nomor meja atau tagihan ke meja kasir untuk melakukan pembayaran.</li>
             </ol>
         </section>
 
-        <!-- ============================================== -->
-        <!-- HALAMAN PEMESANAN (FORM)                       -->
-        <!-- ============================================== -->
+        <!-- HALAMAN PEMESANAN (FORM) -->
         <section id="pemesanan" class="page-section">
             <h2>Formulir Pemesanan Makanan</h2>
-            <p>Silakan isi data diri dan pilihan menu Anda pada formulir di bawah ini.</p>
+            <p>Silakan isi data diri dan pilihan menu Anda pada formulir elektronik di bawah ini.</p>
             
-            <!-- Ditambahkan ID formPemesanan dan event onsubmit -->
             <form id="formPemesanan" onsubmit="prosesPemesanan(event)">
                 <!-- Data Diri -->
                 <div class="form-group">
                     <label for="namaLengkap">Nama Lengkap:</label>
-                    <input type="text" id="namaLengkap" name="namaLengkap" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+                    <input type="text" id="namaLengkap" name="namaLengkap" class="form-control" placeholder="Contoh: Budi Santoso" required>
                 </div>
 
                 <div class="form-group">
@@ -460,7 +554,6 @@
                 <div class="form-group">
                     <label>Pilihan Paket Menu:</label>
                     
-                    <!-- Pilihan Makanan -->
                     <div class="paket-item">
                         <label><input type="checkbox" name="paket[]" value="makanan"> Makanan</label>
                         <select name="pilihanMakanan" class="form-select">
@@ -472,7 +565,6 @@
                         <input type="number" name="qtyMakanan" placeholder="Jml" min="1">
                     </div>
 
-                    <!-- Pilihan Minuman -->
                     <div class="paket-item">
                         <label><input type="checkbox" name="paket[]" value="minuman"> Minuman</label>
                         <select name="pilihanMinuman" class="form-select">
@@ -483,7 +575,6 @@
                         <input type="number" name="qtyMinuman" placeholder="Jml" min="1">
                     </div>
 
-                    <!-- Pilihan Dessert -->
                     <div class="paket-item">
                         <label><input type="checkbox" name="paket[]" value="dessert"> Dessert</label>
                         <select name="pilihanDessert" class="form-select">
@@ -500,23 +591,23 @@
                     <label>Metode Pembayaran:</label>
                     
                     <div class="payment-option">
-                        <label>
+                        <label style="cursor:pointer; display:block;">
                             <input type="radio" name="metodeBayar" value="kartu" required>
-                            Kartu Debit/Kredit 
+                            <span style="font-weight:600; color:var(--secondary);">Kartu Debit/Kredit</span> 
                             <span class="payment-icons">
                                 <i class="fa-brands fa-cc-visa"></i>
                                 <i class="fa-brands fa-cc-mastercard"></i>
                             </span>
                         </label>
-                        <div style="margin-top: 10px; padding-left: 25px;">
+                        <div style="margin-top: 15px;">
                             <input type="text" name="nomorKartu" class="form-control" placeholder="Masukkan 16 digit nomor kartu Anda">
                         </div>
                     </div>
 
                     <div class="payment-option">
-                        <label>
+                        <label style="cursor:pointer; display:block;">
                             <input type="radio" name="metodeBayar" value="ewallet">
-                            Dompet Digital (E-Wallet)
+                            <span style="font-weight:600; color:var(--secondary);">Dompet Digital (E-Wallet)</span>
                             <span class="payment-icons">
                                 <i class="fa-solid fa-wallet"></i>
                             </span>
@@ -524,8 +615,7 @@
                     </div>
                 </div>
 
-                <!-- Tombol Submit -->
-                <button type="submit" class="btn-submit">Kirim Pesanan</button>
+                <button type="submit" class="btn-submit">Kirim Pesanan Sekarang</button>
             </form>
         </section>
 
@@ -535,10 +625,10 @@
             <div class="profil-box">
                 <img src="buat citra.jpeg" alt="Foto Sheva" class="profil-img" onerror="this.src='https://via.placeholder.com/120?text=Foto'">
                 <div>
-                    <p><strong>Nama:</strong> Sheva Abdullah Huda</p>
-                    <p><strong>Nim:</strong> 241011400640</p>
-                    <p><strong>Kelas:</strong> 05TPLP016</p>
-                    <p><strong>Tempat, Tanggal Lahir:</strong> Bandar Lampung, 21/06/06</p>
+                    <p style="margin:5px 0;"><strong>Nama:</strong> Sheva Abdullah Huda</p>
+                    <p style="margin:5px 0;"><strong>Nim:</strong> 241011400640</p>
+                    <p style="margin:5px 0;"><strong>Kelas:</strong> 05TPLP016</p>
+                    <p style="margin:5px 0;"><strong>Tempat, Tanggal Lahir:</strong> Bandar Lampung, 21/06/06</p>
                 </div>
             </div>
         </section>
@@ -546,7 +636,7 @@
         <!-- HALAMAN ABOUT -->
         <section id="about" class="page-section">
             <h2>Tentang Restoran</h2>
-            <p style="line-height: 1.6; text-align: justify;">
+            <p style="line-height: 1.8; text-align: justify; font-size: 1.05em;">
                 <strong>Restoran Asep Taser</strong> didirikan dengan semangat untuk melestarikan resep kuliner khas Nusantara yang autentik. Bermula dari dapur kecil Kang Asep, restoran ini berkembang menjadi tujuan kuliner favorit berkat racikan bumbu rahasia yang turun-temurun. Kami berkomitmen untuk selalu menggunakan bahan-bahan segar berkualitas dan memberikan pelayanan terbaik.
             </p>
         </section>
@@ -554,7 +644,7 @@
         <!-- HALAMAN GALLERY -->
         <section id="gallery" class="page-section">
             <h2>Galeri Kami</h2>
-            <p>Saksikan suasana dan hidangan kami pada video berikut:</p>
+            <p>Saksikan suasana dan hidangan kami pada video eksklusif berikut:</p>
             <div class="video-container">
                 <video controls width="100%" poster="ayam.jpg" preload="metadata">
                     <source src="ayam bakar.mp4" type="video/mp4">
@@ -566,12 +656,13 @@
         <!-- HALAMAN KONTAK -->
         <section id="kontak" class="page-section">
             <h2>Hubungi Kami</h2>
-            <div class="info-box">
+            <div class="info-box" style="border:none;">
+                <p>Silakan hubungi layanan pelanggan kami melalui:</p>
                 <a href="https://wa.me/6289505095340" target="_blank" class="contact-link">
                     <i class="fa-brands fa-whatsapp"></i> 
                     <strong>0895-0509-5340</strong>
                 </a>
-                
+                <br>
                 <a href="mailto:shevaabdullahhuda@gmail.com" class="contact-link">
                     <i class="fa-solid fa-envelope"></i> 
                     <strong>shevaabdullahhuda@gmail.com</strong>
@@ -583,7 +674,11 @@
         <section id="location" class="page-section">
             <h2>Lokasi Restoran</h2>
             <div class="info-box">
-                <p><em>(Jl. Beringin 1 Blok E21 Kelurahan Benda Baru, Kecamatan Pamulang, Kota Tangerang Selatan)</em></p>
+                <p style="margin:0;">
+                    <i class="fa-solid fa-location-dot" style="color:var(--primary); margin-right:10px;"></i>
+                    <strong>Alamat Lengkap:</strong><br>
+                    Jl. Beringin 1 Blok E21 Kelurahan Benda Baru, Kecamatan Pamulang, Kota Tangerang Selatan
+                </p>
             </div>
         </section>
 
@@ -598,14 +693,13 @@
         <div class="modal-content">
             <i class="fa-solid fa-circle-check"></i>
             <h3>Pemesanan Berhasil!</h3>
-            <p>Terima kasih, data booking dan pesanan Anda telah kami terima. Kami akan segera menghubungi nomor WhatsApp Anda untuk konfirmasi.</p>
-            <button class="btn-close" onclick="tutupModal()">Tutup</button>
+            <p style="color: var(--text-muted); line-height: 1.6;">Terima kasih, data booking dan pesanan Anda telah kami terima ke dalam sistem. Kami akan segera menghubungi nomor WhatsApp Anda untuk konfirmasi akhir.</p>
+            <button class="btn-close" onclick="tutupModal()">Kembali ke Beranda</button>
         </div>
     </div>
 
     <!-- Script JavaScript untuk navigasi & form -->
     <script>
-        // Fungsi untuk navigasi antar halaman
         function bukaHalaman(idHalaman) {
             let semuaHalaman = document.getElementsByClassName("page-section");
             for (let i = 0; i < semuaHalaman.length; i++) {
@@ -619,20 +713,21 @@
 
             document.getElementById(idHalaman).classList.add("active");
             document.getElementById("nav-" + idHalaman).classList.add("active-nav");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Fungsi ketika form di-submit
         function prosesPemesanan(event) {
-            event.preventDefault(); // Mencegah reload halaman
-            document.getElementById('modalBerhasil').style.display = 'flex'; // Menampilkan modal pop-up
+            event.preventDefault(); 
+            document.getElementById('modalBerhasil').style.display = 'flex'; 
         }
 
-        // Fungsi untuk menutup modal dan mereset form
         function tutupModal() {
-            document.getElementById('modalBerhasil').style.display = 'none'; // Sembunyikan modal
-            document.getElementById('formPemesanan').reset(); // Mengosongkan isian form
-            bukaHalaman('home'); // Otomatis kembali ke halaman Home
+            document.getElementById('modalBerhasil').style.display = 'none'; 
+            document.getElementById('formPemesanan').reset(); 
+            bukaHalaman('home'); 
         }
     </script>
 </body>
 </html>
+
+```
