@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restoran Asep Taser</title>
     
-    <!-- Memuat Library Icon (FontAwesome) untuk Logo WA & Email -->
+    <!-- Memuat Library Icon (FontAwesome) untuk Logo WA, Email, dan Pembayaran -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -24,13 +24,16 @@
             display: flex;
             justify-content: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .navbar a {
             display: block;
             color: white;
             text-align: center;
-            padding: 14px 20px;
+            padding: 14px 18px;
             text-decoration: none;
             font-weight: bold;
             cursor: pointer;
@@ -95,16 +98,13 @@
             text-align: center;
         }
 
-        /* ================================== */
-        /* GAYA BARU UNTUK LIST BERSARANG     */
-        /* ================================== */
+        /* List & Tabel */
         .kategori-list > li {
             font-weight: bold;
             color: #d9534f;
             margin-bottom: 10px;
             font-size: 1.1em;
         }
-
         .kategori-list ul {
             font-weight: normal;
             color: #333;
@@ -112,45 +112,162 @@
             margin-top: 5px;
             font-size: 0.95em;
         }
-
-        /* ================================== */
-        /* GAYA BARU UNTUK TABEL MENU         */
-        /* ================================== */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
         }
-
         table, th, td {
             border: 1px solid #ccc;
         }
-
         th, td {
             padding: 12px;
             text-align: left;
         }
-
         th {
             background-color: #d9534f;
             color: white;
             text-align: center;
         }
+        tr:nth-child(even) { background-color: #f9f9f9; }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        /* ================================== */
-        /* GAYA BARU UNTUK LANGKAH PEMESANAN  */
-        /* ================================== */
         .langkah-pesan li {
             margin-bottom: 10px;
             padding-left: 5px;
             line-height: 1.5;
         }
 
-        /* Profil */
+        /* ================================== */
+        /* GAYA UNTUK FORM PEMESANAN          */
+        /* ================================== */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        
+        /* Desain Baris Pilihan Paket Menu */
+        .paket-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fafafa;
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+        .paket-item > label {
+            flex: 0 0 130px; /* Lebar tetap untuk label */
+            margin: 0;
+            font-weight: normal;
+        }
+        .form-select {
+            flex: 1; /* Mengambil ruang tersisa */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .paket-item input[type="number"] {
+            width: 70px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .payment-option {
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        .payment-icons {
+            font-size: 1.5em;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .fa-cc-visa { color: #1a1f71; }
+        .fa-cc-mastercard { color: #eb001b; }
+        .fa-wallet { color: #4CAF50; }
+        
+        .btn-submit {
+            background-color: #d9534f;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #c9302c;
+        }
+
+        /* ================================== */
+        /* GAYA POP-UP MODAL (BERHASIL)       */
+        /* ================================== */
+        .modal-overlay {
+            display: none; /* Disembunyikan awalnya */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-content .fa-circle-check {
+            color: #28a745;
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+        .modal-content h3 {
+            color: #28a745;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .btn-close {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .btn-close:hover { background-color: #555; }
+
+        /* Profil, Video, Kontak */
         .profil-box {
             display: flex;
             align-items: center;
@@ -160,7 +277,6 @@
             border-radius: 8px;
             border: 1px solid #eee;
         }
-
         .profil-img {
             width: 120px;
             height: 120px;
@@ -168,8 +284,6 @@
             object-fit: cover;
             border: 3px solid #d9534f;
         }
-
-        /* Video */
         .video-container {
             width: 100%;
             border-radius: 8px;
@@ -177,13 +291,7 @@
             background-color: #000;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-
-        video {
-            width: 100%;
-            display: block;
-        }
-
-        /* Kontak & Lokasi */
+        video { width: 100%; display: block; }
         .info-box {
             background-color: #fff8f6;
             border: 1px dashed #d9534f;
@@ -192,7 +300,6 @@
             line-height: 2;
             font-size: 1.1em;
         }
-
         .contact-link {
             display: flex;
             align-items: center;
@@ -201,13 +308,7 @@
             color: #333;
             margin-bottom: 10px;
         }
-
-        .contact-link:hover {
-            color: #d9534f;
-        }
-
-        .fa-whatsapp { color: #25D366; font-size: 1.4em; }
-        .fa-envelope { color: #d9534f; font-size: 1.3em; }
+        .contact-link:hover { color: #d9534f; }
 
         footer {
             margin-top: 30px;
@@ -224,6 +325,7 @@
     <!-- Bilah Navigasi -->
     <nav class="navbar">
         <a onclick="bukaHalaman('home')" id="nav-home" class="active-nav">Home</a>
+        <a onclick="bukaHalaman('pemesanan')" id="nav-pemesanan">Pemesanan</a>
         <a onclick="bukaHalaman('profil')" id="nav-profil">Profil</a>
         <a onclick="bukaHalaman('about')" id="nav-about">About</a>
         <a onclick="bukaHalaman('gallery')" id="nav-gallery">Gallery</a>
@@ -233,7 +335,7 @@
 
     <div class="container">
         
-        <!-- HALAMAN HOME DENGAN TABEL, NESTED LIST, DAN ORDERED LIST -->
+        <!-- HALAMAN HOME -->
         <section id="home" class="page-section active">
             <header>
                 <h1>Restoran Asep Taser</h1>
@@ -244,7 +346,7 @@
                 Selamat datang di Restoran Asep Taser! Berikut adalah panduan kategori menu, daftar harga lengkap menggunakan desain tabel variatif, serta tata cara pemesanan di restoran kami.
             </p>
 
-            <!-- Nested List (Daftar Bertingkat) -->
+            <!-- Nested List -->
             <h2>Kategori Hidangan</h2>
             <ul class="kategori-list">
                 <li>Makanan Utama (Main Course)
@@ -267,7 +369,7 @@
                 </li>
             </ul>
 
-            <!-- Tabel Daftar Menu -->
+            <!-- Tabel Menu -->
             <h2>Daftar Harga Menu</h2>
             <table>
                 <thead>
@@ -318,15 +420,113 @@
                 </tbody>
             </table>
 
-            <!-- Ordered List (Langkah Pemesanan) -->
+            <!-- Ordered List -->
             <h2>5 Langkah Pemesanan Makanan</h2>
             <ol class="langkah-pesan">
                 <li>Silakan cari dan pilih tempat duduk yang tersedia di area restoran.</li>
                 <li>Tentukan hidangan utama, minuman, dan <em>dessert</em> dari tabel menu di atas.</li>
-                <li>Panggil pelayan yang sedang bertugas dan sebutkan pesanan Anda dengan jelas.</li>
+                <li>Panggil pelayan yang sedang bertugas dan sebutkan pesanan Anda dengan jelas atau isi form di menu <strong>Pemesanan</strong>.</li>
                 <li>Tunggu sekitar 10-15 menit selagi koki menyiapkan hidangan segar Anda.</li>
                 <li>Bawa nomor meja atau tagihan ke meja kasir untuk melakukan pembayaran setelah selesai makan.</li>
             </ol>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- HALAMAN PEMESANAN (FORM)                       -->
+        <!-- ============================================== -->
+        <section id="pemesanan" class="page-section">
+            <h2>Formulir Pemesanan Makanan</h2>
+            <p>Silakan isi data diri dan pilihan menu Anda pada formulir di bawah ini.</p>
+            
+            <!-- Ditambahkan ID formPemesanan dan event onsubmit -->
+            <form id="formPemesanan" onsubmit="prosesPemesanan(event)">
+                <!-- Data Diri -->
+                <div class="form-group">
+                    <label for="namaLengkap">Nama Lengkap:</label>
+                    <input type="text" id="namaLengkap" name="namaLengkap" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="noHp">Nomor HP (WhatsApp):</label>
+                    <input type="tel" id="noHp" name="noHp" class="form-control" placeholder="Contoh: 08123456789" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tanggalBooking">Tanggal Booking:</label>
+                    <input type="date" id="tanggalBooking" name="tanggalBooking" class="form-control" required>
+                </div>
+
+                <!-- Pilihan Paket Kategori -->
+                <div class="form-group">
+                    <label>Pilihan Paket Menu:</label>
+                    
+                    <!-- Pilihan Makanan -->
+                    <div class="paket-item">
+                        <label><input type="checkbox" name="paket[]" value="makanan"> Makanan</label>
+                        <select name="pilihanMakanan" class="form-select">
+                            <option value="" disabled selected>-- Pilih Makanan --</option>
+                            <option value="Nasi Goreng">Nasi Goreng Taser Pedas</option>
+                            <option value="Ayam Bakar">Ayam Bakar Khas Kang Asep</option>
+                            <option value="Soto Betawi">Soto Betawi Kuah Santan</option>
+                        </select>
+                        <input type="number" name="qtyMakanan" placeholder="Jml" min="1">
+                    </div>
+
+                    <!-- Pilihan Minuman -->
+                    <div class="paket-item">
+                        <label><input type="checkbox" name="paket[]" value="minuman"> Minuman</label>
+                        <select name="pilihanMinuman" class="form-select">
+                            <option value="" disabled selected>-- Pilih Minuman --</option>
+                            <option value="Jus Alpukat">Jus Alpukat Spesial</option>
+                            <option value="Es Teh Lemon">Es Teh Lemon Selasih</option>
+                        </select>
+                        <input type="number" name="qtyMinuman" placeholder="Jml" min="1">
+                    </div>
+
+                    <!-- Pilihan Dessert -->
+                    <div class="paket-item">
+                        <label><input type="checkbox" name="paket[]" value="dessert"> Dessert</label>
+                        <select name="pilihanDessert" class="form-select">
+                            <option value="" disabled selected>-- Pilih Dessert --</option>
+                            <option value="Puding Cokelat">Puding Cokelat Lumer</option>
+                            <option value="Es Krim Pisang">Es Krim Pisang Bakar</option>
+                        </select>
+                        <input type="number" name="qtyDessert" placeholder="Jml" min="1">
+                    </div>
+                </div>
+
+                <!-- Pilihan Pembayaran -->
+                <div class="form-group">
+                    <label>Metode Pembayaran:</label>
+                    
+                    <div class="payment-option">
+                        <label>
+                            <input type="radio" name="metodeBayar" value="kartu" required>
+                            Kartu Debit/Kredit 
+                            <span class="payment-icons">
+                                <i class="fa-brands fa-cc-visa"></i>
+                                <i class="fa-brands fa-cc-mastercard"></i>
+                            </span>
+                        </label>
+                        <div style="margin-top: 10px; padding-left: 25px;">
+                            <input type="text" name="nomorKartu" class="form-control" placeholder="Masukkan 16 digit nomor kartu Anda">
+                        </div>
+                    </div>
+
+                    <div class="payment-option">
+                        <label>
+                            <input type="radio" name="metodeBayar" value="ewallet">
+                            Dompet Digital (E-Wallet)
+                            <span class="payment-icons">
+                                <i class="fa-solid fa-wallet"></i>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Tombol Submit -->
+                <button type="submit" class="btn-submit">Kirim Pesanan</button>
+            </form>
         </section>
 
         <!-- HALAMAN PROFIL -->
@@ -393,8 +593,19 @@
         </footer>
     </div>
 
-    <!-- Script JavaScript untuk mengatur perpindahan halaman/menu -->
+    <!-- MODAL POP-UP PESANAN BERHASIL -->
+    <div id="modalBerhasil" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>Pemesanan Berhasil!</h3>
+            <p>Terima kasih, data booking dan pesanan Anda telah kami terima. Kami akan segera menghubungi nomor WhatsApp Anda untuk konfirmasi.</p>
+            <button class="btn-close" onclick="tutupModal()">Tutup</button>
+        </div>
+    </div>
+
+    <!-- Script JavaScript untuk navigasi & form -->
     <script>
+        // Fungsi untuk navigasi antar halaman
         function bukaHalaman(idHalaman) {
             let semuaHalaman = document.getElementsByClassName("page-section");
             for (let i = 0; i < semuaHalaman.length; i++) {
@@ -408,6 +619,19 @@
 
             document.getElementById(idHalaman).classList.add("active");
             document.getElementById("nav-" + idHalaman).classList.add("active-nav");
+        }
+
+        // Fungsi ketika form di-submit
+        function prosesPemesanan(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            document.getElementById('modalBerhasil').style.display = 'flex'; // Menampilkan modal pop-up
+        }
+
+        // Fungsi untuk menutup modal dan mereset form
+        function tutupModal() {
+            document.getElementById('modalBerhasil').style.display = 'none'; // Sembunyikan modal
+            document.getElementById('formPemesanan').reset(); // Mengosongkan isian form
+            bukaHalaman('home'); // Otomatis kembali ke halaman Home
         }
     </script>
 </body>
