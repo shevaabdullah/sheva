@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coding Academy Sheva</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="bar">
+  <div class="logo"><i>&lt;/&gt;</i><span>Coding Academy <em>Sheva</em></span></div>
+  <nav aria-label="Menu utama">
+    <button data-view="gallery" aria-current="page">Galeri</button>
+    <button data-view="register">Pendaftaran</button>
+  </nav>
+<button class="themebtn" id="theme" type="button" aria-label="Ganti mode"><span class="ic" id="theme-ic"></span></button>
+</div></header>
+
+<main>
+<section id="gallery" class="view">
+  <div class="hero">
+    <div>
+      <h1>Belajar ngoding jadi <span>seru</span> bareng Sheva.</h1>
+      <p>Kelas praktik langsung, mentor yang sabar, dan proyek nyata di setiap pertemuan. Mulai dari nol sampai bisa membuat aplikasi sendiri.</p>
+      <button class="cta" data-view="register">Daftar sekarang</button>
+    </div>
+    <div class="editor" aria-hidden="true">
+      <div class="top"><b></b><b></b><b></b></div>
+      <pre id="typed"></pre>
+    </div>
+  </div>
+  <h2>Galeri kegiatan pelatihan</h2>
+  <p class="sub">Intip suasana belajar di Coding Academy Sheva. Arahkan kursor ke kartu untuk melihat lebih dekat.</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="register" class="view" hidden>
+  <h2>Pendaftaran peserta</h2>
+  <p class="sub">Isi data diri dan pilih bahasa pemrograman yang ingin Anda pelajari.</p>
+  <div class="formwrap">
+    <div>
+      <form id="form" novalidate>
+        <div class="field"><label for="nik">NIK</label>
+          <input id="nik" type="text" inputmode="numeric" maxlength="16" placeholder="16 digit angka" autocomplete="off">
+          <div class="err" id="e-nik"></div></div>
+        <div class="field"><label for="nama">Nama lengkap</label>
+          <input id="nama" type="text" autocomplete="name">
+          <div class="err" id="e-nama"></div></div>
+        <div class="field"><fieldset><legend>Jenis kelamin</legend>
+          <div class="radios">
+            <label><input type="radio" name="jk" value="Laki-laki"> Laki-laki</label>
+            <label><input type="radio" name="jk" value="Perempuan"> Perempuan</label>
+          </div><div class="err" id="e-jk"></div></fieldset></div>
+        <div class="field"><label for="hp">No. HP</label>
+          <input id="hp" type="tel" inputmode="tel" placeholder="08xxxxxxxxxx" autocomplete="tel">
+          <div class="err" id="e-hp"></div></div>
+        <div class="field"><label for="alamat">Alamat</label>
+          <textarea id="alamat" rows="3" autocomplete="street-address"></textarea>
+          <div class="err" id="e-alamat"></div></div>
+        <div class="field"><label for="bahasa">Bahasa pemrograman yang diminati</label>
+          <select id="bahasa">
+            <option value="">Pilih bahasa pemrograman</option>
+            <option>JavaScript</option><option>Python</option><option>Java</option>
+            <option>PHP</option><option>C#</option><option>Go</option><option>Kotlin</option>
+          </select>
+          <div class="err" id="e-bahasa"></div></div>
+        <div class="actions">
+          <button class="cta alt" type="submit">Simpan pendaftaran</button>
+          <button class="cta ghost" type="reset">Kosongkan form</button>
+        </div>
+      </form>
+      <div class="result" id="result" hidden>
+        <h2>Pendaftaran tersimpan 🎉</h2>
+        <p class="sub" style="margin:0">Berikut data yang Anda isi:</p>
+        <dl id="dl"></dl>
+        <button class="cta alt" id="again" type="button">Daftarkan peserta lain</button>
+      </div>
+    </div>
+    <aside class="side">
+      <h3>Yang Anda dapat</h3>
+      <ul><li>Mentor berpengalaman</li><li>Proyek portofolio nyata</li><li>Sertifikat kelulusan</li><li>Komunitas alumni</li></ul>
+    </aside>
+  </div>
+</section>
+</main>
+
+<dialog id="info" aria-labelledby="i-t">
+  <div class="ihead" id="i-head">
+    <span class="em" id="i-em"></span>
+    <div><span class="badge" id="i-tag"></span><h3 id="i-t"></h3></div>
+  </div>
+  <div class="ibody">
+    <p id="i-info"></p>
+    <div class="facts">
+      <div><small>Waktu</small><b id="i-w"></b></div>
+      <div><small>Tempat</small><b id="i-p"></b></div>
+      <div><small>Peserta</small><b id="i-s"></b></div>
+    </div>
+    <h4>Yang dipelajari dan dilakukan</h4>
+    <ul id="i-m"></ul>
+    <div class="actions">
+      <button class="cta alt" id="i-daftar" type="button">Daftar sekarang</button>
+      <button class="cta ghost" id="i-tutup" type="button">Tutup</button>
+    </div>
+  </div>
+</dialog>
+<dialog id="dlg" aria-labelledby="dt">
+  <h3 id="dt">Konfirmasi</h3>
+  <p>Apakah Anda sudah yakin untuk menyimpan?</p>
+  <div class="actions">
+    <button class="cta alt" id="yes" type="button">Ya</button>
+    <button class="cta ghost" id="no" type="button">Tidak</button>
+  </div>
+</dialog>
+<footer>© 2026 Coding Academy Sheva</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
